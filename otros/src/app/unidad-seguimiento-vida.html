@@ -1,0 +1,204 @@
+<div *ngIf="modoDialogo !== modoDialogoBaja">
+    <div class="ModalNuevoSgtoVida">
+      <form [formGroup]="formAltaModificacion" #f="ngForm" class="col-12">
+        <div class="flex flex-row col-12">
+          <div class="flex flex-column col-6">
+            <label [for]="inputIndicadoresId" class="lbl-it">I Tiempo/Ciclos* </label>
+  
+            <p-autoComplete
+              class="p-autoComplete"
+              [inputId]="inputIndicadoresId"
+              [ngClass]="
+                (formAltaModificacion?.controls.indicadorTiempoCiclos.errors?.required || !tiempoCiclosEsObjeto) && mostrarMnsjValidacionTiempoCiclos
+                  ? 'p-inputtext p-component p-element error'
+                  : 'p-inputtext p-component p-element ng-pristine ng-valid ng-touched'
+              "
+              type="text"
+              width="w-full"
+              formControlName="indicadorTiempoCiclos"
+              pInputText
+              [(ngModel)]="unidadesSgtoVida.indicadorTiempoCiclosResponse"
+              ngModel
+              (completeMethod)="buscarIndicador($event)"
+              [suggestions]="indicadoresTiempoCiclosList"
+              field="descripcion"
+              [dropdown]="true"
+              required
+              placeholder="Selecciona"
+              (onBlur)="onFocusOutEvent($event)"
+            >
+              <ng-template let-indicador pTemplate="item">
+                <div class="indicador-item">
+                  <div>{{ indicador.descripcion }}</div>
+                </div>
+              </ng-template>
+            </p-autoComplete>
+  
+            <small
+              _ngcontent-tji-c93=""
+              id="idError-help"
+              class="p-error text-validation"
+              *ngIf="(formAltaModificacion?.controls.indicadorTiempoCiclos.errors?.required || !tiempoCiclosEsObjeto) && mostrarMnsjValidacionTiempoCiclos"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.83333 0C2.61333 0 0 2.61333 0 5.83333C0 9.05333 2.61333 11.6667 5.83333 11.6667C9.05333 11.6667 11.6667 9.05333 11.6667 5.83333C11.6667 2.61333 9.05333 0 5.83333 0ZM6.41667 8.75H5.25V7.58333H6.41667V8.75ZM6.41667 6.41667H5.25V2.91667H6.41667V6.41667Z"
+                  fill="#E8132A"
+                />
+              </svg>
+              El indicador es obligatorio
+            </small>
+          </div>
+  
+          <div class="flex flex-column col-3">
+            <label [for]="inputHorasVueloId" class="lbl-it">Cantidad Horas Vuelo*</label>
+            <p-inputNumber
+              [ngClass]="
+                formAltaModificacion?.controls.factorConversion.errors?.required && mostrarMnsjValidacionHoras
+                  ? 'p-inputtext:disabled p-component p-element error'
+                  : 'p-inputtext:disabled p-component p-element ng-pristine ng-valid ng-touched'
+              "
+              [inputId]="inputHorasVueloId"
+              placeholder="000.000,00"
+              [(ngModel)]="unidadesSgtoVida.factorConversion"
+              formControlName="factorConversion"
+              (focusout)="onFocusOutEvent($event)"
+              mode="decimal"
+              locale="es-ES"
+              [max]="999999"
+              [minFractionDigits]="0"
+              [maxFractionDigits]="2"
+              [maxlength]="9"
+            >
+            </p-inputNumber>
+  
+            <small
+              _ngcontent-tji-c93=""
+              id="idError-help"
+              class="p-error text-validation"
+              *ngIf="formAltaModificacion?.controls.factorConversion.errors?.required && mostrarMnsjValidacionHoras"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.83333 0C2.61333 0 0 2.61333 0 5.83333C0 9.05333 2.61333 11.6667 5.83333 11.6667C9.05333 11.6667 11.6667 9.05333 11.6667 5.83333C11.6667 2.61333 9.05333 0 5.83333 0ZM6.41667 8.75H5.25V7.58333H6.41667V8.75ZM6.41667 6.41667H5.25V2.91667H6.41667V6.41667Z"
+                  fill="#E8132A"
+                />
+              </svg>
+              La Cantidad de horas es obligatoria
+            </small>
+          </div>
+  
+          <div class="flex flex-column col-3">
+            <label for="sistemaAutomatizado" class="lbl-it">Sistemas Automatizados</label>
+            <p-checkbox id="sistemaAutomatizado" formControlName="sistemaAutomatizado" [(ngModel)]="unidadesSgtoVida.sistemasAutomatizados" binary="true">
+            </p-checkbox>
+          </div>
+        </div>
+  
+        <div class="flex flex-row col-12">
+          <div class="flex flex-column col-6">
+            <label [for]="inputEdcId" class="lbl-it">I.E.C.:</label>
+  
+            <p-autoComplete
+              [inputId]="inputEdcId"
+              type="text"
+              width="10px"
+              formControlName="edc"
+              pInputText
+              [(ngModel)]="edcResponse"
+              ngModel
+              (completeMethod)="buscarEdc($event)"
+              [suggestions]="edcList"
+              field="iec"
+              [dropdown]="true"
+              required
+              placeholder="Selecciona"
+              (onBlur)="onFocusOutEvent($event)"
+            >
+              <ng-template let-edcResponse pTemplate="item">
+                <div class="edcResponse-item">
+                  <div>{{ edcResponse.iec }} - {{ edcResponse.variante }}</div>
+                </div>
+              </ng-template>
+            </p-autoComplete>
+          </div>
+  
+          <div class="flex flex-column col-3">
+            <label for="input-edc-variante" class="lbl-it">Variante</label>
+            <input
+              ngClass="p-inputtext p-component p-element ng-pristine ng-valid ng-touched"
+              type="text"
+              pinputtext=""
+              formControlName="variante"
+              id="input-edc-variante"
+              placeholder=""
+              [(ngModel)]="edcResponse.variante"
+            />
+          </div>
+        </div>
+  
+        <div class="flex flex-row col-12">
+          <div class="flex flex-column col-6">
+            <label [for]="inputIecId" class="lbl-it">Hueco:</label>
+  
+            <p-autoComplete
+              [inputId]="inputIecId"
+              type="text"
+              width="10px"
+              formControlName="iec"
+              pInputText
+              [(ngModel)]="huecoResponse"
+              ngModel
+              (completeMethod)="buscarHueco($event)"
+              [suggestions]="huecosList"
+              field="posicion"
+              [dropdown]="true"
+              required
+              placeholder="Selecciona"
+              (onBlur)="onFocusOutEvent($event)"
+            >
+              <ng-template let-hueco pTemplate="item">
+                <div class="hueco-item">
+                  <div>{{ hueco.posicion }}</div>
+                </div>
+              </ng-template>
+            </p-autoComplete>
+          </div>
+  
+          <div class="flex flex-column col-6">
+            <label for="input-edc-descripcion" class="lbl-it">Descripción</label>
+            <input
+              ngClass="p-inputtext p-component p-element ng-pristine ng-valid ng-touched"
+              type="text"
+              pinputtext=""
+              formControlName="descripcion"
+              id="input-edc-descripcion"
+              placeholder=""
+              [(ngModel)]="huecoResponse.descripcionIec"
+            />
+          </div>
+        </div>
+      </form>
+      <div class="p-dialog-footer pr-3">
+        <button (click)="hacerAccion()" type="button" id="dialogo-unid-sgto-vida-gest-sag-boton-aceptar" class="p-element p-ripple p-button-text p-confirm-dialog-reject p-button p-component">
+          <span class="p-button-label">Aceptar</span>
+          <span class="p-ink"></span>
+        </button>
+        <button (click)="cancelar()" type="button" id="dialogo-unid-sgto-vida-gest-sag-boton-cancelar" class="p-element p-ripple p-confirm-dialog-accept p-button p-component">
+          <span class="p-button-label">Cancelar</span>
+          <span class="p-ink"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="modoDialogo === modoDialogoBaja">
+    <dialogo-borrar-elemento
+      elemento="el Seguimiento de Vida"
+      [codigo]="unidadesSgtoVida.indicadorTiempoCiclosResponse.descripcion"
+      (botonSi)="hacerAccion()"
+      (botonNo)="cancelar()"
+    >
+    </dialogo-borrar-elemento>
+  </div>
+  

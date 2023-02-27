@@ -1,0 +1,71 @@
+<main #mainGestionSag class="mainSLE" role="main">
+    <div class="divImgFull" id="idImgCab">
+      <figure>
+        <img
+          class="imgFull"
+          [@mostrarImagen]="this.mostrarImagen ? 'mostrar' : 'ocultar'"
+          src="assets/images/fighter-pilot-plane-analisis.png"
+          id="imgFull"
+          alt="imagen piloto"
+        />
+      </figure>
+    </div>
+    <div class="divAnalitic">
+      <div class="AnaliticMain" id="idAnaliticMain">
+        <!-- Identificador -->
+        <div class="col-12">
+          <p-fieldset [legend]="this.leyendaIdentificacion" [toggleable]="true" [collapsed]="this.mostrarTab" class="col-12">
+            <dynamic-form *ngIf="this.formGestSag" [formulario]="this.formGestSag" (submit)="buscar($event)"></dynamic-form>
+          </p-fieldset>
+        </div>
+        <div class="col-12">
+          <p-tabView *ngIf="this.mostrarTab">
+            <p-tabPanel [header]="translateService.translate('GENERAL')" [selected]="true">
+              <ng-template pTemplate="content">
+                <tab-general-gestion-sag
+                  [idSag]="this.sagResponse.id"
+                  [(state)]="this.stateGestionSag"
+                  (actualizarDatos)="actualizarDatosGeneral()"
+                  #general
+                  [sagRequest]="this.sagRequest"
+                  style="width: 90%"
+                ></tab-general-gestion-sag>
+              </ng-template>
+            </p-tabPanel>
+            <p-tabPanel *ngIf="this.stateGestionSag.action == 'edit'" [header]="translateService.translate('INGENIERIA.SISTEMA_DE_ARMAS')">
+              <ng-template pTemplate="content">
+                <tab-sistema-armas-gestion-sag [idPadre]="sagResponse.id"></tab-sistema-armas-gestion-sag>
+              </ng-template>
+            </p-tabPanel>
+            <p-tabPanel *ngIf="this.stateGestionSag.action == 'edit'" [header]="translateService.translate('INGENIERIA.UNIDADES_SEGUIMIENTO_VIDA')">
+              <ng-template pTemplate="content">
+                <tab-unidades-sgto-vida-gestion-sag [idPadre]="sagResponse.id"></tab-unidades-sgto-vida-gestion-sag>
+              </ng-template>
+            </p-tabPanel>
+            <p-tabPanel *ngIf="this.stateGestionSag.action == 'edit'" [header]="translateService.translate('INGENIERIA.ORGANISMOS_LOGISTICOS')">
+              <ng-template pTemplate="content">
+                <tab-organismos-logisticos-sag [idPadre]="sagResponse.id"> </tab-organismos-logisticos-sag>
+              </ng-template>
+            </p-tabPanel>
+            <p-tabPanel *ngIf="this.stateGestionSag.action == 'edit'" [header]="translateService.translate('INGENIERIA.CONFIGURACIONES_OPERATIVAS')">
+              <ng-template pTemplate="content">
+                <tab-configuraciones-operativas-gestion-sag [idPadre]="sagResponse.id" [codigoSag]="sagResponse.codigo">
+                </tab-configuraciones-operativas-gestion-sag>
+              </ng-template>
+            </p-tabPanel>
+            <p-tabPanel *ngIf="this.stateGestionSag.action == 'edit'" [header]="translateService.translate('INGENIERIA.ESTACIONES_CARGA')">
+              <ng-template pTemplate="content">
+                <tab-estaciones-carga-sag [idPadre]="sagResponse.id"> </tab-estaciones-carga-sag>
+              </ng-template>
+            </p-tabPanel>
+            <p-tabPanel *ngIf="this.stateGestionSag.action == 'edit'" [header]="translateService.translate('INGENIERIA.ME_SISTEMAS_AUTOMATIZADOS')">
+              <ng-template pTemplate="content">
+                <tab-sistemas-automatizados-sag [idPadre]="sagResponse.id"> </tab-sistemas-automatizados-sag>
+              </ng-template>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+    </div>
+  </main>
+  

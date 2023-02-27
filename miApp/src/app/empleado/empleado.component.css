@@ -1,0 +1,9 @@
+h2{
+    font-size: 14px;
+    color: blueviolet;
+}
+
+h2 span{
+    font-size: 14px;
+    color: rgb(226, 92, 43);
+}

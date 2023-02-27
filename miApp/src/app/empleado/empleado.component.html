@@ -1,0 +1,68 @@
+
+<div class="docu row">
+    <div class="col-2"><h2>Nombre: {{nombre}}</h2></div>
+    <div class="col-4">
+        <h2 class="col-4">Edad: {{edad}} 
+            <span>{{edad >18 ? "Mayor de edad" : "Menor de edad"}}</span>
+        </h2>
+    </div>
+    <div class="col-2"><h2>Contacto (mvl): {{mvl.value}}</h2></div>
+    <div class="col-2"><h2>Contacto (email): {{email.value}}</h2></div>
+    <div class="col-2"><h2>Empresa: {{empresa}}</h2></div>
+ 
+
+</div>
+
+
+
+
+<br><br>
+Escribe tu número:
+<input type="number" #mvl>
+<br>
+<input type="button" value="Guardar" (click)="guardaMvl(mvl.value)">
+<p>Contacto (mvl): {{mvl.value}}</p>
+<br><br>
+
+Escribe tu email: <input type="text" value="" #email (keyup)="0" >
+<p>Contacto (email): {{email.value}}</p>
+<br><br>
+
+
+Escribe tu nombre de usuario: <input type="text" value="" #usuario (keyup)="0" [disabled]="apagadoInput">
+<p>Usuario: {{usuario.value}}</p>
+<br><br>
+
+Deshabilitado y marcado por defecto: <input type="checkbox" id="registrado" [checked]="checkMarcado" [disabled]="checkDeshabilitado">
+{{getRegistroUruario()}}
+<br><br>
+
+
+Con opción a marcar y alert: <input type="checkbox" (click)="setRegistrarUsuario()">
+<br><br>
+
+Con cambio de texto al dar al check:<br>
+{{textoDeRegistro}} <input type="checkbox" (click)="setCambioTexto()">
+<br><br>
+
+<p>Genero: {{textoGenero}}</p>
+H:<input type="radio" value="hombre" name="nRegistro" (click)="setSelecionaGenero($event)">
+M:<input type="radio" value="mujer" name="nRegistro" (click)="setSelecionaGenero($event)">
+<br><br>
+<br><br>
+
+<!-- Binding bidireccional -->
+Introduce empresa <input type="text" [(ngModel)]="empresa">
+<p>Empresa: {{empresa}}</p>
+
+Cambia tu edad arriba <input type="text" [(ngModel)]="edad">
+
+
+
+
+
+
+
+
+
+
