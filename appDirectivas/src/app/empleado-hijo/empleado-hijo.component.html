@@ -1,0 +1,23 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div>
+        {{i+1}}: {{empleado.nombre}}
+        {{empleado.apellido}}
+        {{empleado.cargo}}
+        <!-- <span [ngStyle]="{color: 'salario' < '40000' ? 'red' : 'black'}"> {{empleado.salario}} </span> -->
+
+        <span [ngClass]="{salarioAlto: 'salario' >= '40000'}"> {{empleado.salario}} </span>
+      </div>
+
+      <app-caracteristicas-hijo (caracteristicasHijo)="agregarCaracteristica($event)"></app-caracteristicas-hijo>
+
+      <ul>
+        <li *ngFor="let caracteristica of arrayCaracteristicas">{{caracteristica}}</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+

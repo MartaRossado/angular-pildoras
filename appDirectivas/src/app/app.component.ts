@@ -25,7 +25,4 @@ export class AppComponent {
     this.empleados.push(miEmpleado);
 
   }
-
-
-
 }

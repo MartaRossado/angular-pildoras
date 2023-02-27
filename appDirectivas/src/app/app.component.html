@@ -27,27 +27,12 @@
         <button type="submit" class="btn btn-primary" (click)="agregarEmpleado()" style="margin-top: 25px; margin-bottom: 35px;">Agregar empleado</button>
       </div>
       <br>
-      
+
     </form>
   </div>
 
 </div>
 
+<app-empleado-hijo *ngFor="let empleado of empleados; let i=index" [empleado]="empleado" [i]="i"></app-empleado-hijo>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div *ngFor="let empleado of empleados; let i=index">
-        {{i+1}}: {{empleado.nombre}} 
-        {{empleado.apellido}} 
-        {{empleado.cargo}}
-        <!-- <span [ngStyle]="{color: 'salario' < '40000' ? 'red' : 'black'}"> {{empleado.salario}} </span> -->
 
-        <span [ngClass]="{salarioAlto: 'salario' >= '40000'}"> {{empleado.salario}} </span>
-        
-      </div>
-    </div>
-
-  </div>
-
-</div>
